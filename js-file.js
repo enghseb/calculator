@@ -1,5 +1,15 @@
 numberToDisplay = 0
 
+const equalButton = document.getElementById('equal')
+
+
+
+equalButton.addEventListener('click', test)
+
+function test(){
+    console.log("DU tryckte på =")
+}
+
 function operator(num, num2, operator){
     answer = operator(num, num2)
     return answer
@@ -51,7 +61,7 @@ function convertButtonClickToOperator(buttonClicked) {
 convertButtonClickToOperator()
 
 //Listens for button click
-const buttons = document.querySelectorAll('.button');
+const buttons = document.querySelectorAll('.number');
     buttons.forEach((button) => {
     button.addEventListener('click', () => {
         buttonClicked = button.innerHTML;
