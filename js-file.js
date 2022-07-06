@@ -25,3 +25,16 @@ function multiply(num, num2) {
 
 operator(5,2,subtract)
 console.log(answer)
+
+const buttons = document.querySelectorAll('.button');
+    buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        buttonClicked = button.innerHTML
+        if(isNaN(buttonClicked)) {
+            console.log("Inget jävla nr")
+        } else {
+            console.log("NUMMER")
+        }
+    });
+});
+
