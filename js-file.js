@@ -1,3 +1,5 @@
+numberToDisplay = 0
+
 function operator(num, num2, operator){
     answer = operator(num, num2)
     return answer
@@ -23,17 +25,22 @@ function multiply(num, num2) {
     return factor
 };
 
-operator(5,2,subtract)
-console.log(answer)
+/* operator(5,2,subtract)
+console.log(answer) */
 
 const buttons = document.querySelectorAll('.button');
     buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        buttonClicked = button.innerHTML
+        buttonClicked = button.innerHTML;
         if(isNaN(buttonClicked)) {
             console.log("Inget jävla nr")
         } else {
-            console.log("NUMMER")
+            if(numberToDisplay == 0) {
+                numberToDisplay = buttonClicked;
+            } else {
+                    numberToDisplay = numberToDisplay+buttonClicked;
+                }
+                console.log(numberToDisplay)
         }
     });
 });
