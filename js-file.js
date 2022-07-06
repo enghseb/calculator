@@ -37,7 +37,7 @@ function convertButtonClickToOperator(buttonClicked) {
     /*Checks what operation should be done by what button was pressed */
     const operatorConversionTable = 
     {"multiply": "x",
-    "divide": "/", 
+    "divide": "÷", 
     "add": "+",
     "subtract": "-",
     "clear": "Clear",
@@ -58,7 +58,9 @@ const buttons = document.querySelectorAll('.button');
         //Check if button clicked is a number
         if(isNaN(buttonClicked)) {
             operator = convertButtonClickToOperator(buttonClicked)
+            numberToDisplay = `${numberToDisplay} ${buttonClicked} `
             console.log(operator)
+            updateDisplay(numberToDisplay)
         } else {
             //If button clicked is a number, update display correctly
             if(numberToDisplay == 0) {
