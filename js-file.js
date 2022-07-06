@@ -1,10 +1,18 @@
 numberToDisplay = 0
 
 const equalButton = document.getElementById('equal')
-
-
+const multiplyButton = document.getElementById('multiply')
+const addButton = document.getElementById('add')
+const divideButton = document.getElementById('divide')
+const subtractButton = document.getElementById('subtract')
+const cleanButton = document.getElementById('clean')
 
 equalButton.addEventListener('click', test)
+multiplyButton.addEventListener('click', test)
+addButton.addEventListener('click', test)
+divideButton.addEventListener('click', test)
+subtractButton.addEventListener('click', test)
+cleanButton.addEventListener('click', test)
 
 function test(){
     console.log("DU tryckte på =")
