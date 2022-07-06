@@ -18,12 +18,16 @@
 .buttons {
     display: flex;
     flex-wrap: wrap;
+    font-size: 20px;
     width: 400px;
     background-color: rgb(43, 43, 43);
 }
 
 .button {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 22%;
     margin: 5px;
     height: 50px;
@@ -32,9 +36,18 @@
 }
 
 .display {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 0px;
     height: 80px;
     width: 388px;
-    background-color: aquamarine;
+    background-color: rgb(155, 219, 182);
     border-radius: 25px;
     margin-bottom: 10px;
+}
+
+.text {
+    padding-right: 15px;
+    font-size: 30px;
 }
