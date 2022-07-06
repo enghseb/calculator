@@ -28,6 +28,12 @@ function multiply(num, num2) {
 /* operator(5,2,subtract)
 console.log(answer) */
 
+function updateDisplay(numberToDisplay) {
+    const displayDiv = document.getElementById('text');
+    displayDiv.textContent = numberToDisplay
+}
+
+
 const buttons = document.querySelectorAll('.button');
     buttons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -37,8 +43,10 @@ const buttons = document.querySelectorAll('.button');
         } else {
             if(numberToDisplay == 0) {
                 numberToDisplay = buttonClicked;
+                updateDisplay(numberToDisplay)
             } else {
                     numberToDisplay = numberToDisplay+buttonClicked;
+                    updateDisplay(numberToDisplay)
                 }
                 console.log(numberToDisplay)
         }
