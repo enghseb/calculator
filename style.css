@@ -45,6 +45,7 @@
     background-color: rgb(155, 219, 182);
     border-radius: 25px;
     margin-bottom: 10px;
+    text-overflow: clip;
 }
 
 #text {

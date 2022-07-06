@@ -33,14 +33,34 @@ function updateDisplay(numberToDisplay) {
     displayDiv.textContent = numberToDisplay
 }
 
+function convertButtonClickToOperator(buttonClicked) {
+    /*Checks what operation should be done by what button was pressed */
+    const operatorConversionTable = 
+    {"multiply": "x",
+    "divide": "/", 
+    "add": "+",
+    "subtract": "-",
+    "clear": "Clear",
+}
+    //Finds key from conversion table by looking at button clicked
+    const operator = Object.keys(operatorConversionTable).find(key => 
+        operatorConversionTable[key].includes(buttonClicked));
+    return operator;
+}
 
+convertButtonClickToOperator()
+
+//Listens for button click
 const buttons = document.querySelectorAll('.button');
     buttons.forEach((button) => {
     button.addEventListener('click', () => {
         buttonClicked = button.innerHTML;
+        //Check if button clicked is a number
         if(isNaN(buttonClicked)) {
-            console.log("Inget jävla nr")
+            operator = convertButtonClickToOperator(buttonClicked)
+            console.log(operator)
         } else {
+            //If button clicked is a number, update display correctly
             if(numberToDisplay == 0) {
                 numberToDisplay = buttonClicked;
                 updateDisplay(numberToDisplay)
