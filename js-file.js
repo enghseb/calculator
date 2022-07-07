@@ -22,7 +22,11 @@ clearButton.addEventListener('click', clickClearAction);
 equalButton.addEventListener('click', clickEqualAction);
 
 function clickClearAction(){
-    /* To be written */
+    firstNumber = 0;
+    secondNumber = 0;
+    firstNumberInput = true;
+    updateTopDisplay(0)
+    updateBottomDisplay(0)
 }
 
 function clickEqualAction(){
