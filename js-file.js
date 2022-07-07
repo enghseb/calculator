@@ -58,6 +58,10 @@ function updateDisplayOnAnswer() {
 }
 
 function clickEqualAction(){
+    /* First line make sure if an operator is clicked and then equal sign
+    the function does not try to provide an answer. Same if same operator has 
+    been pressed twice (usually we want answer for this) but not if it's right
+    after a calculation has been done */
     if(lastClick != "operator" || (operatorPressed == lastOperationPressed && firstNumber != "")) {
         lastClick = "operator"
         if (operatorPressed == "add") {
@@ -184,3 +188,11 @@ function clickNumberAction(event){
         updateBottomDisplay(firstNumber)
     }
 }
+
+/* TODO 
+Button animation
+Better design
+Working . button (can only press once)
+Cut of decimals
+Text cut off if to long
+*/
