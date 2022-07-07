@@ -30,14 +30,27 @@ function clickClearAction(){
     updateBottomDisplay(0)
 }
 
+function updateDisplayOnAnswer() {
+    updateTopDisplay(`${secondNumber} ${operatorSign} ${firstNumber} =`)
+    updateBottomDisplay(answer)
+    secondNumber = firstNumber;
+    firstNumber = answer;
+}
+
 function clickEqualAction(){
+    console.log(operatorPressed)
     if (operatorPressed == "add") {
         answer = add(secondNumber, firstNumber)
-        updateTopDisplay(`${secondNumber} ${operatorSign} ${firstNumber} =`)
-        updateBottomDisplay(answer)
-        secondNumber = firstNumber;
-        firstNumber = answer;
+    } else if (operatorPressed == "multiply") {
+        answer = multiply(secondNumber, firstNumber)
+    } else if (operatorPressed == "divide") {
+        answer = divide(secondNumber, firstNumber)
+    } else if (operatorPressed == "subtract") {
+        answer = subtract(secondNumber, firstNumber)
+    } else {
+
     }
+    updateDisplayOnAnswer()
 }
 
 function clickOperatorAgainAction(){
