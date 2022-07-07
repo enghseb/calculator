@@ -21,6 +21,7 @@ clearButton.addEventListener('click', clickClearAction);
 equalButton.addEventListener('click', clickEqualAction);
 
 function clickClearAction(){
+    /*Reset calculator state so user can start fresh */
     firstNumber = 0;
     secondNumber = 0;
     operator = ""
@@ -38,7 +39,7 @@ function updateDisplayOnAnswer() {
 }
 
 function clickEqualAction(){
-    
+    /* Picks correct operation for getting an answer */
     if (operatorPressed == "add") {
         answer = add(secondNumber, firstNumber)
     } else if (operatorPressed == "multiply") {
@@ -50,19 +51,25 @@ function clickEqualAction(){
     } else {
 
     }
+    //Displays text differently if an operator has not been pressed
     if (firstOperatorClick) {
         updateDisplayOnAnswer()
+        //Displays text differently if an operator has been pressed
     } else {
         operatorPressed = event.target.id
         operatorSign = operatorIDToOperatorSign(operatorPressed)
         console.log(operatorPressed)
         console.log(operatorSign)
         updateBottomDisplay(`${answer}`)
+            /*If the equal sign is pressed we want the last
+            calculation to display at the top */
             if (operatorPressed == "equal") {
                 updateTopDisplay(`${secondNumber} ${secondOperatorSign} ${firstNumber} =`)
+                //If it's not an equal sign clicked, we only display answer and operator sign
             } else {
                 updateTopDisplay(`${answer} ${operatorSign}`)
             }
+        //New numbers can be typed, and saves the last answer to be used in next calculation
         firstNumber = 0;
         secondNumber = answer;
     }
@@ -135,6 +142,7 @@ function clickOperatorAction(event){
 }
 
 function clickNumberAction(event){
+    /*Updates display if a number is clicked */
     console.log(event.target.innerText)
     numberClicked = event.target.innerText
     if(firstNumber == 0) {
