@@ -1,21 +1,23 @@
-numberToDisplay = 0
+numberToDisplay = 0;
+firstNumberInput = true;
 
 const equalButton = document.getElementById('equal')
 const multiplyButton = document.getElementById('multiply')
 const addButton = document.getElementById('add')
 const divideButton = document.getElementById('divide')
 const subtractButton = document.getElementById('subtract')
-const cleanButton = document.getElementById('clean')
+const clearButton = document.getElementById('clear')
 
-equalButton.addEventListener('click', test)
-multiplyButton.addEventListener('click', test)
-addButton.addEventListener('click', test)
-divideButton.addEventListener('click', test)
-subtractButton.addEventListener('click', test)
-cleanButton.addEventListener('click', test)
+equalButton.addEventListener('click', test);
+multiplyButton.addEventListener('click', test);
+addButton.addEventListener('click', test);
+divideButton.addEventListener('click', test);
+subtractButton.addEventListener('click', test);
+clearButton.addEventListener('click', test);
 
-function test(){
-    console.log("DU tryckte på =")
+function test(event){
+    /*Retrives what button was clicked */
+    console.log(event.target.id)
 }
 
 function operator(num, num2, operator){
@@ -43,9 +45,6 @@ function multiply(num, num2) {
     return factor
 };
 
-/* operator(5,2,subtract)
-console.log(answer) */
-
 function updateDisplay(numberToDisplay) {
     const displayDiv = document.getElementById('text');
     displayDiv.textContent = numberToDisplay
@@ -65,8 +64,6 @@ function convertButtonClickToOperator(buttonClicked) {
         operatorConversionTable[key].includes(buttonClicked));
     return operator;
 }
-
-convertButtonClickToOperator()
 
 //Listens for button click
 const buttons = document.querySelectorAll('.number');
@@ -93,3 +90,5 @@ const buttons = document.querySelectorAll('.number');
     });
 });
 
+convertButtonClickToOperator()
+console.log(test)
