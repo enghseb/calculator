@@ -3,6 +3,7 @@ firstNumber = 0;
 secondNumber = 0;
 firstOperatorClick = true;
 secondOperatorSign = ""
+lastClick = ""
 
 const numberButtons = document.querySelectorAll('.number')
 const multiplyButton = document.getElementById('multiply')
@@ -14,8 +15,8 @@ const equalButton = document.getElementById('equal')
 const backspaceButton = document.getElementById('backspace')
 
 /* Mainly wanted to practice an arrow function. */
-let clickBackspaceAction = backspace => updateBottomDisplay(firstNumber =
-    (firstNumber-(firstNumber%10))/10);
+let clickBackspaceAction = backspace => {if(lastClick == "number") updateBottomDisplay(firstNumber =
+    (firstNumber-(firstNumber%10))/10)};
 
 numberButtons.forEach((number) => {number.addEventListener('click', clickNumberAction)});
 multiplyButton.addEventListener('click', clickOperatorAction);
@@ -28,6 +29,7 @@ backspaceButton.addEventListener('click', clickBackspaceAction);
 
 function clickClearAction(){
     /*Reset calculator state so user can start fresh */
+    lastClick = "operator"
     firstNumber = 0;
     secondNumber = 0;
     operator = ""
@@ -46,6 +48,7 @@ function updateDisplayOnAnswer() {
 
 function clickEqualAction(){
     /* Picks correct operation for getting an answer */
+    lastClick = "operator"
     if (operatorPressed == "add") {
         answer = add(secondNumber, firstNumber)
     } else if (operatorPressed == "multiply") {
@@ -131,6 +134,7 @@ function operatorIDToOperatorSign(buttonClicked) {
 function clickOperatorAction(event){
     /*Retrive which button was clicked convert, button
     into correct sign and update display */
+    lastClick = "operator"
     if(firstOperatorClick) {
         operatorPressed = event.target.id
         operatorSign = operatorIDToOperatorSign(operatorPressed)
@@ -149,6 +153,7 @@ function clickOperatorAction(event){
 
 function clickNumberAction(event){
     /*Updates display if a number is clicked */
+    lastClick = "number"
     console.log(event.target.innerText)
     numberClicked = event.target.innerText
     if(firstNumber == 0) {
