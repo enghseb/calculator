@@ -58,7 +58,7 @@ function updateDisplayOnAnswer() {
 }
 
 function clickEqualAction(){
-    if(lastClick != "operator") {
+    if(lastClick != "operator" || (operatorPressed == lastOperationPressed && firstNumber != "")) {
         lastClick = "operator"
         if (operatorPressed == "add") {
             answer = add(secondNumber, firstNumber)
@@ -93,12 +93,8 @@ function clickEqualAction(){
             decimalPressed = false;
         }
     } else {
-
+        //Equal sign being pressed after pressing an operator, we want nothing done
     }
-    
-    /* Picks correct operation for getting an answer */
-    
-    
 }
     
 function add(num, num2) {
@@ -167,6 +163,7 @@ function clickOperatorAction(event){
         //If two operations are pressed after each other, we use last one
         topTextToDisplay = `${secondNumber} ${operatorSign}`
         updateTopDisplay(topTextToDisplay)
+        
     }
     //Makes sure we can compare if same operation is pressed twice above
     lastOperationPressed = operatorPressed;
@@ -187,7 +184,3 @@ function clickNumberAction(event){
         updateBottomDisplay(firstNumber)
     }
 }
-
-/*  Need to make it so that if an operator just was pressed,
-    pressing the equal sign will do nothing at all.
-*/
