@@ -37,8 +37,9 @@
 
 .display {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
     padding-right: 0px;
     height: 80px;
     width: 388px;
@@ -48,7 +49,12 @@
     text-overflow: clip;
 }
 
-#text {
+#topText {
+    padding-right: 15px;
+    font-size: 20px;
+}
+
+#bottomText {
     padding-right: 15px;
     font-size: 30px;
 }

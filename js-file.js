@@ -8,16 +8,19 @@ const divideButton = document.getElementById('divide')
 const subtractButton = document.getElementById('subtract')
 const clearButton = document.getElementById('clear')
 
-equalButton.addEventListener('click', test);
-multiplyButton.addEventListener('click', test);
-addButton.addEventListener('click', test);
-divideButton.addEventListener('click', test);
-subtractButton.addEventListener('click', test);
-clearButton.addEventListener('click', test);
+equalButton.addEventListener('click', clickAction);
+multiplyButton.addEventListener('click', clickAction);
+addButton.addEventListener('click', clickAction);
+divideButton.addEventListener('click', clickAction);
+subtractButton.addEventListener('click', clickAction);
+clearButton.addEventListener('click', clickAction);
 
-function test(event){
-    /*Retrives what button was clicked */
-    console.log(event.target.id)
+function clickAction(event){
+    /*Retrive which button was clicked */
+    operatorPressed = event.target.id
+    OperatorSign = operatorIDToOperatorSign(operatorPressed)
+    topTextToDisplay = `${numberToDisplay} ${OperatorSign}`
+    updateTopDisplay(topTextToDisplay)
 }
 
 function operator(num, num2, operator){
@@ -45,19 +48,25 @@ function multiply(num, num2) {
     return factor
 };
 
-function updateDisplay(numberToDisplay) {
-    const displayDiv = document.getElementById('text');
-    displayDiv.textContent = numberToDisplay
+function updateTopDisplay(topTextToDisplay){
+    const topDisplayDiv = document.getElementById('topText');
+    topDisplayDiv.textContent = topTextToDisplay;
+
 }
 
-function convertButtonClickToOperator(buttonClicked) {
+function updateDisplay(numberToDisplay) {
+    const displayDiv = document.getElementById('bottomText');
+    displayDiv.textContent = numberToDisplay;
+}
+
+function operatorIDToOperatorSign(buttonClicked) {
     /*Checks what operation should be done by what button was pressed */
     const operatorConversionTable = 
-    {"multiply": "x",
-    "divide": "÷", 
-    "add": "+",
-    "subtract": "-",
-    "clear": "Clear",
+    {"x": "multiply",
+    "÷": "divide", 
+    "+": "add",
+    "-": "subtract",
+    "clear": "clear",
 }
     //Finds key from conversion table by looking at button clicked
     const operator = Object.keys(operatorConversionTable).find(key => 
@@ -90,5 +99,4 @@ const buttons = document.querySelectorAll('.number');
     });
 });
 
-convertButtonClickToOperator()
-console.log(test)
+
