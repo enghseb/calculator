@@ -1,29 +1,38 @@
 numberToDisplay = 0;
 firstNumberInput = true;
 
-const equalButton = document.getElementById('equal')
 const multiplyButton = document.getElementById('multiply')
 const addButton = document.getElementById('add')
 const divideButton = document.getElementById('divide')
 const subtractButton = document.getElementById('subtract')
 const clearButton = document.getElementById('clear')
+const equalButton = document.getElementById('equal')
 
-equalButton.addEventListener('click', clickAction);
 multiplyButton.addEventListener('click', clickAction);
 addButton.addEventListener('click', clickAction);
 divideButton.addEventListener('click', clickAction);
 subtractButton.addEventListener('click', clickAction);
 clearButton.addEventListener('click', clickAction);
+equalButton.addEventListener('click', clickAction);
+
 
 function clickAction(event){
     /*Retrive which button was clicked
     convert button into correct sign */
+    console.log(event.target.id)
     operatorPressed = event.target.id
-    OperatorSign = operatorIDToOperatorSign(operatorPressed)
-    secondNumber = numberToDisplay
-    topTextToDisplay = `${secondNumber} ${OperatorSign}`
-    updateTopDisplay(topTextToDisplay)
-    numberToDisplay = 0;
+    if (!(operatorPressed == "clear" || operatorPressed == "equal")){
+        OperatorSign = operatorIDToOperatorSign(operatorPressed)
+        secondNumber = numberToDisplay
+        topTextToDisplay = `${secondNumber} ${OperatorSign}`
+        updateTopDisplay(topTextToDisplay)
+        numberToDisplay = 0;
+    } else {
+        console.log("test")
+    }
+
+
+    
 }
 
 function operator(num, num2, operator){
