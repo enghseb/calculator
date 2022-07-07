@@ -1,6 +1,8 @@
 numberToDisplay = 0;
 secondNumber = 0;
 firstNumberInput = true;
+operation = "";
+/* operatorSign = ""; */
 
 const multiplyButton = document.getElementById('multiply')
 const addButton = document.getElementById('add')
@@ -16,9 +18,7 @@ subtractButton.addEventListener('click', clickAction);
 clearButton.addEventListener('click', clickClearAction);
 equalButton.addEventListener('click', clickEqualAction);
 
-function clickEqualAction(){
-    console.log("najs")
-}
+
 
 function clickClearAction(){
     /* To be written */
@@ -33,7 +33,7 @@ function operator(num, num2, operation){
 };
     
 function add(num, num2) {
-    sum = num+num2
+    sum = +num + +num2;
     return sum
 };
 
@@ -55,7 +55,6 @@ function multiply(num, num2) {
 function updateTopDisplay(topTextToDisplay){
     const topDisplayDiv = document.getElementById('topText');
     topDisplayDiv.textContent = topTextToDisplay;
-
 }
 
 function updateDisplay(numberToDisplay) {
@@ -82,27 +81,23 @@ function clickAction(event){
     /*Retrive which button was clicked convert, button
     into correct sign and update display */
     operatorPressed = event.target.id
-    OperatorSign = operatorIDToOperatorSign(operatorPressed)
+    operatorSign = operatorIDToOperatorSign(operatorPressed)
     secondNumber = numberToDisplay
-    topTextToDisplay = `${secondNumber} ${OperatorSign}`
+    topTextToDisplay = `${secondNumber} ${operatorSign}`
     updateTopDisplay(topTextToDisplay)
     //User need to be able to input a new number
     numberToDisplay = 0;    
 }
 
-//Listens for button click
+/* ALL BELOW SHOULD BE REWRITTEN AS SEVERAL FUNCTIONS
+    THE CODE DOES WORK THOUGH */
+
+//Listens for button (number) click
 const buttons = document.querySelectorAll('.number');
     buttons.forEach((button) => {
     button.addEventListener('click', () => {
         buttonClicked = button.innerHTML;
-        //Check if button clicked is a number
-        if(isNaN(buttonClicked)) {
-            operator = convertButtonClickToOperator(buttonClicked)
-            numberToDisplay = `${numberToDisplay} ${buttonClicked} `
-            console.log(operator)
-            updateDisplay(numberToDisplay)
-        } else {
-            //If button clicked is a number, update display correctly
+            //Comment what below does
             if(numberToDisplay == 0) {
                 numberToDisplay = buttonClicked;
                 updateDisplay(numberToDisplay)
@@ -111,8 +106,17 @@ const buttons = document.querySelectorAll('.number');
                     updateDisplay(numberToDisplay)
                 }
                 console.log(numberToDisplay)
-        }
     });
-});
+    });
+
+    function clickEqualAction(){
+        if (operatorPressed == "add") {
+            answer = add(secondNumber, numberToDisplay)
+            updateTopDisplay(`${secondNumber} ${operatorSign} ${numberToDisplay} =`)
+            updateDisplay(answer)
+        }
+    }
 
 
+    /* Måste byta namn på updateDisplay till bottomDisplay, 
+    måste byta namn på numberToDisplay och kanske number 2. Förtydliga det. */
