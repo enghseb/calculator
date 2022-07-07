@@ -16,11 +16,14 @@ subtractButton.addEventListener('click', clickAction);
 clearButton.addEventListener('click', clickAction);
 
 function clickAction(event){
-    /*Retrive which button was clicked */
+    /*Retrive which button was clicked
+    convert button into correct sign */
     operatorPressed = event.target.id
     OperatorSign = operatorIDToOperatorSign(operatorPressed)
-    topTextToDisplay = `${numberToDisplay} ${OperatorSign}`
+    secondNumber = numberToDisplay
+    topTextToDisplay = `${secondNumber} ${OperatorSign}`
     updateTopDisplay(topTextToDisplay)
+    numberToDisplay = 0;
 }
 
 function operator(num, num2, operator){
