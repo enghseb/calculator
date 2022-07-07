@@ -1,7 +1,7 @@
 numberToDisplay = 0;
 firstNumber = 0;
 secondNumber = 0;
-firstNumberInput = true;
+firstOperatorClick = true;
 
 const numberButtons = document.querySelectorAll('.number')
 const multiplyButton = document.getElementById('multiply')
@@ -24,7 +24,8 @@ equalButton.addEventListener('click', clickEqualAction);
 function clickClearAction(){
     firstNumber = 0;
     secondNumber = 0;
-    firstNumberInput = true;
+    operator = ""
+    answer = 0
     updateTopDisplay(0)
     updateBottomDisplay(0)
 }
@@ -34,7 +35,18 @@ function clickEqualAction(){
         answer = add(secondNumber, firstNumber)
         updateTopDisplay(`${secondNumber} ${operatorSign} ${firstNumber} =`)
         updateBottomDisplay(answer)
+        secondNumber = firstNumber;
+        firstNumber = answer;
     }
+}
+
+function clickOperatorAgainAction(){
+    answer = add(secondNumber, firstNumber)
+    console.log(answer)
+    updateTopDisplay(`${answer} ${operatorSign}`)
+    updateBottomDisplay(`${answer}`)
+    firstNumber = 0;
+    secondNumber = answer;
 }
     
 function add(num, num2) {
@@ -85,13 +97,22 @@ function operatorIDToOperatorSign(buttonClicked) {
 function clickOperatorAction(event){
     /*Retrive which button was clicked convert, button
     into correct sign and update display */
-    operatorPressed = event.target.id
-    operatorSign = operatorIDToOperatorSign(operatorPressed)
-    secondNumber = firstNumber;
-    topTextToDisplay = `${secondNumber} ${operatorSign}`
-    updateTopDisplay(topTextToDisplay)
-    //User need to be able to input a new number
-    firstNumber = 0;    
+    if(firstOperatorClick) {
+        operatorPressed = event.target.id
+        operatorSign = operatorIDToOperatorSign(operatorPressed)
+        secondNumber = firstNumber;
+        topTextToDisplay = `${secondNumber} ${operatorSign}`
+        updateTopDisplay(topTextToDisplay)
+        //User need to be able to input a new number
+        firstNumber = 0;
+        firstOperatorClick = false;
+    } else {
+        clickOperatorAgainAction()
+        /* firstNumber = 0;
+        console.log(`First number is ${firstNumber} \n Second number is ${secondNumber} \n Operator is ${operatorPressed} \n answer is ${answer}`) */
+        /* firstOperatorClick = true; */
+    }
+  
 }
 
 function clickNumberAction(event){
@@ -130,3 +151,11 @@ function clickNumberAction(event){
 
 
     /* måste byta namn på numberToDisplay och kanske number 2. Förtydliga det. */
+
+    /*
+    Om man klickar på ett nummer ska det dyka upp på nedre displayen
+    Klickar man på ett till nummer ska det fortsätta "bygga på", på nedre displayen
+    Klickar man på addition så ska nummret flyttas upp till övre displayen med ett additionstecken bakom sig, samt stå kvar på nedre
+    Klickar man på addition igen
+    
+    */
