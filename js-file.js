@@ -4,6 +4,7 @@ secondNumber = 0;
 firstOperatorClick = true;
 secondOperatorSign = ""
 lastClick = ""
+decimalPressed = false;
 
 const numberButtons = document.querySelectorAll('.number')
 const multiplyButton = document.getElementById('multiply')
@@ -13,6 +14,7 @@ const subtractButton = document.getElementById('subtract')
 const clearButton = document.getElementById('clear')
 const equalButton = document.getElementById('equal')
 const backspaceButton = document.getElementById('backspace')
+const decimalButton = document.getElementById('decimal')
 
 /* Mainly wanted to practice an arrow function. */
 let clickBackspaceAction = backspace => {if(lastClick == "number") updateBottomDisplay(firstNumber =
@@ -26,6 +28,7 @@ subtractButton.addEventListener('click', clickOperatorAction);
 clearButton.addEventListener('click', clickClearAction);
 equalButton.addEventListener('click', clickEqualAction);
 backspaceButton.addEventListener('click', clickBackspaceAction);
+decimalButton.addEventListener('click', clickDecimalAction);
 
 function clickClearAction(){
     /*Reset calculator state so user can start fresh */
@@ -37,6 +40,14 @@ function clickClearAction(){
     firstOperatorClick = true;
     updateTopDisplay(0)
     updateBottomDisplay(0)
+}
+
+function clickDecimalAction(){
+    /* Not done */
+    if(decimalPressed) {
+        console.log("has been pressed");
+    } else {console.log("has not been pressed");}
+    decimalPressed = true;
 }
 
 function updateDisplayOnAnswer() {
@@ -67,8 +78,6 @@ function clickEqualAction(){
     } else {
         operatorPressed = event.target.id
         operatorSign = operatorIDToOperatorSign(operatorPressed)
-        console.log(operatorPressed)
-        console.log(operatorSign)
         updateBottomDisplay(`${answer}`)
             /*If the equal sign is pressed we want the last
             calculation to display at the top */
@@ -81,6 +90,7 @@ function clickEqualAction(){
         //New numbers can be typed, and saves the last answer to be used in next calculation
         firstNumber = "";
         secondNumber = answer;
+        decimalPressed = false;
     }
     
 }
@@ -135,26 +145,33 @@ function clickOperatorAction(event){
     /*Retrive which button was clicked convert, button
     into correct sign and update display */
     lastClick = "operator"
+    operatorPressed = event.target.id
+    operatorSign = operatorIDToOperatorSign(operatorPressed)
     if(firstOperatorClick) {
-        operatorPressed = event.target.id
-        operatorSign = operatorIDToOperatorSign(operatorPressed)
         secondNumber = firstNumber;
         topTextToDisplay = `${secondNumber} ${operatorSign}`
         updateTopDisplay(topTextToDisplay)
         //User need to be able to input a new number
         firstNumber = 0;
         firstOperatorClick = false;
-    } else {
+        //If same operation is pressed twice we want an answer produced
+    } else if (operatorPressed == lastOperationPressed) {
         clickEqualAction()
+    } else {
+        //If two operations are pressed after each other, we use last one
+        topTextToDisplay = `${secondNumber} ${operatorSign}`
+        updateTopDisplay(topTextToDisplay)
     }
+    //Makes sure we can compare if same operation is pressed twice above
+    lastOperationPressed = operatorPressed;
     //Without this operator sign can't display as top-text after pressing equal
     secondOperatorSign = operatorSign;
+    
 }
 
 function clickNumberAction(event){
     /*Updates display if a number is clicked */
     lastClick = "number"
-    console.log(event.target.innerText)
     numberClicked = event.target.innerText
     if(firstNumber == 0) {
         firstNumber = numberClicked;
@@ -164,3 +181,22 @@ function clickNumberAction(event){
         updateBottomDisplay(firstNumber)
     }
 }
+
+/* Need to refactor clickEqualAction and clickOperatorAction
+    They should not build as heavily on each other.
+
+    If you write 5 / + the / should just become a +
+    Currently pressing operators several times will make calculations
+    Which is not good at all. What's messy here is that pressing 5 * 5 * 
+    should output 25. Current function does not work for both of these
+    cases. Because it only cares about wether its the first or second operator
+    going in. Which in both cases above is second.
+
+    If operator clicked == secondOperationSign
+
+    Also need to make it so that if an operator just was pressed,
+    pressing the equal sign will do nothing at all.
+
+    All of this should be solvable with a "last button pressed"
+    
+*/
