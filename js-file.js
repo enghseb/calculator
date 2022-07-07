@@ -1,4 +1,5 @@
 numberToDisplay = 0;
+secondNumber = 0;
 firstNumberInput = true;
 
 const multiplyButton = document.getElementById('multiply')
@@ -12,32 +13,23 @@ multiplyButton.addEventListener('click', clickAction);
 addButton.addEventListener('click', clickAction);
 divideButton.addEventListener('click', clickAction);
 subtractButton.addEventListener('click', clickAction);
-clearButton.addEventListener('click', clickAction);
-equalButton.addEventListener('click', clickAction);
+clearButton.addEventListener('click', clickClearAction);
+equalButton.addEventListener('click', clickEqualAction);
 
-
-function clickAction(event){
-    /*Retrive which button was clicked
-    convert button into correct sign */
-    console.log(event.target.id)
-    operatorPressed = event.target.id
-    if (!(operatorPressed == "clear" || operatorPressed == "equal")){
-        OperatorSign = operatorIDToOperatorSign(operatorPressed)
-        secondNumber = numberToDisplay
-        topTextToDisplay = `${secondNumber} ${OperatorSign}`
-        updateTopDisplay(topTextToDisplay)
-        numberToDisplay = 0;
-    } else {
-        console.log("test")
-    }
-
-
-    
+function clickEqualAction(){
+    console.log("najs")
 }
 
-function operator(num, num2, operator){
-    answer = operator(num, num2)
-    return answer
+function clickClearAction(){
+    /* To be written */
+}
+
+function operator(num, num2, operation){
+
+    yalla = `${operation}(${num}, ${num2})`
+    /* answer = operation(num, num2)  */
+    console.log(yalla)
+   /*  return answer */
 };
     
 function add(num, num2) {
@@ -84,6 +76,18 @@ function operatorIDToOperatorSign(buttonClicked) {
     const operator = Object.keys(operatorConversionTable).find(key => 
         operatorConversionTable[key].includes(buttonClicked));
     return operator;
+}
+
+function clickAction(event){
+    /*Retrive which button was clicked convert, button
+    into correct sign and update display */
+    operatorPressed = event.target.id
+    OperatorSign = operatorIDToOperatorSign(operatorPressed)
+    secondNumber = numberToDisplay
+    topTextToDisplay = `${secondNumber} ${OperatorSign}`
+    updateTopDisplay(topTextToDisplay)
+    //User need to be able to input a new number
+    numberToDisplay = 0;    
 }
 
 //Listens for button click
