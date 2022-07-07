@@ -14,10 +14,10 @@ const equalButton = document.getElementById('equal')
 
 numberButtons.forEach((number) => {number.addEventListener('click', clickNumberAction)});
 /* numberButtons.addEventListener('click', clickNumberAction); */
-multiplyButton.addEventListener('click', clickAction);
-addButton.addEventListener('click', clickAction);
-divideButton.addEventListener('click', clickAction);
-subtractButton.addEventListener('click', clickAction);
+multiplyButton.addEventListener('click', clickOperatorAction);
+addButton.addEventListener('click', clickOperatorAction);
+divideButton.addEventListener('click', clickOperatorAction);
+subtractButton.addEventListener('click', clickOperatorAction);
 clearButton.addEventListener('click', clickClearAction);
 equalButton.addEventListener('click', clickEqualAction);
 
@@ -78,7 +78,7 @@ function operatorIDToOperatorSign(buttonClicked) {
     return operator;
 }
 
-function clickAction(event){
+function clickOperatorAction(event){
     /*Retrive which button was clicked convert, button
     into correct sign and update display */
     operatorPressed = event.target.id
