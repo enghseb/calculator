@@ -58,40 +58,46 @@ function updateDisplayOnAnswer() {
 }
 
 function clickEqualAction(){
-    /* Picks correct operation for getting an answer */
-    lastClick = "operator"
-    if (operatorPressed == "add") {
-        answer = add(secondNumber, firstNumber)
-    } else if (operatorPressed == "multiply") {
-        answer = multiply(secondNumber, firstNumber)
-    } else if (operatorPressed == "divide") {
-        answer = divide(secondNumber, firstNumber)
-    } else if (operatorPressed == "subtract") {
-        answer = subtract(secondNumber, firstNumber)
+    if(lastClick != "operator") {
+        lastClick = "operator"
+        if (operatorPressed == "add") {
+            answer = add(secondNumber, firstNumber)
+        } else if (operatorPressed == "multiply") {
+            answer = multiply(secondNumber, firstNumber)
+        } else if (operatorPressed == "divide") {
+            answer = divide(secondNumber, firstNumber)
+        } else if (operatorPressed == "subtract") {
+            answer = subtract(secondNumber, firstNumber)
+        } else {
+
+        }
+        //Displays text differently if an operator has not been pressed
+        if (firstOperatorClick) {
+            updateDisplayOnAnswer()
+            //Displays text differently if an operator has been pressed
+        } else {
+            operatorPressed = event.target.id
+            operatorSign = operatorIDToOperatorSign(operatorPressed)
+            updateBottomDisplay(`${answer}`)
+                /*If the equal sign is pressed we want the last
+                calculation to display at the top */
+                if (operatorPressed == "equal") {
+                    updateTopDisplay(`${secondNumber} ${secondOperatorSign} ${firstNumber} =`)
+                    //If it's not an equal sign clicked, we only display answer and operator sign
+                } else {
+                    updateTopDisplay(`${answer} ${operatorSign}`)
+                }
+            //New numbers can be typed, and saves the last answer to be used in next calculation
+            firstNumber = "";
+            secondNumber = answer;
+            decimalPressed = false;
+        }
     } else {
 
     }
-    //Displays text differently if an operator has not been pressed
-    if (firstOperatorClick) {
-        updateDisplayOnAnswer()
-        //Displays text differently if an operator has been pressed
-    } else {
-        operatorPressed = event.target.id
-        operatorSign = operatorIDToOperatorSign(operatorPressed)
-        updateBottomDisplay(`${answer}`)
-            /*If the equal sign is pressed we want the last
-            calculation to display at the top */
-            if (operatorPressed == "equal") {
-                updateTopDisplay(`${secondNumber} ${secondOperatorSign} ${firstNumber} =`)
-                //If it's not an equal sign clicked, we only display answer and operator sign
-            } else {
-                updateTopDisplay(`${answer} ${operatorSign}`)
-            }
-        //New numbers can be typed, and saves the last answer to be used in next calculation
-        firstNumber = "";
-        secondNumber = answer;
-        decimalPressed = false;
-    }
+    
+    /* Picks correct operation for getting an answer */
+    
     
 }
     
@@ -182,21 +188,6 @@ function clickNumberAction(event){
     }
 }
 
-/* Need to refactor clickEqualAction and clickOperatorAction
-    They should not build as heavily on each other.
-
-    If you write 5 / + the / should just become a +
-    Currently pressing operators several times will make calculations
-    Which is not good at all. What's messy here is that pressing 5 * 5 * 
-    should output 25. Current function does not work for both of these
-    cases. Because it only cares about wether its the first or second operator
-    going in. Which in both cases above is second.
-
-    If operator clicked == secondOperationSign
-
-    Also need to make it so that if an operator just was pressed,
+/*  Need to make it so that if an operator just was pressed,
     pressing the equal sign will do nothing at all.
-
-    All of this should be solvable with a "last button pressed"
-    
 */
