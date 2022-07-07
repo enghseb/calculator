@@ -1,9 +1,9 @@
 numberToDisplay = 0;
+firstNumber = 0;
 secondNumber = 0;
 firstNumberInput = true;
-operation = "";
-/* operatorSign = ""; */
 
+const numberButtons = document.querySelectorAll('.number')
 const multiplyButton = document.getElementById('multiply')
 const addButton = document.getElementById('add')
 const divideButton = document.getElementById('divide')
@@ -11,6 +11,9 @@ const subtractButton = document.getElementById('subtract')
 const clearButton = document.getElementById('clear')
 const equalButton = document.getElementById('equal')
 
+
+numberButtons.forEach((number) => {number.addEventListener('click', clickNumberAction)});
+/* numberButtons.addEventListener('click', clickNumberAction); */
 multiplyButton.addEventListener('click', clickAction);
 addButton.addEventListener('click', clickAction);
 divideButton.addEventListener('click', clickAction);
@@ -18,19 +21,17 @@ subtractButton.addEventListener('click', clickAction);
 clearButton.addEventListener('click', clickClearAction);
 equalButton.addEventListener('click', clickEqualAction);
 
-
-
 function clickClearAction(){
     /* To be written */
 }
 
-function operator(num, num2, operation){
-
-    yalla = `${operation}(${num}, ${num2})`
-    /* answer = operation(num, num2)  */
-    console.log(yalla)
-   /*  return answer */
-};
+function clickEqualAction(){
+    if (operatorPressed == "add") {
+        answer = add(secondNumber, firstNumber)
+        updateTopDisplay(`${secondNumber} ${operatorSign} ${firstNumber} =`)
+        updateBottomDisplay(answer)
+    }
+}
     
 function add(num, num2) {
     sum = +num + +num2;
@@ -57,9 +58,9 @@ function updateTopDisplay(topTextToDisplay){
     topDisplayDiv.textContent = topTextToDisplay;
 }
 
-function updateDisplay(numberToDisplay) {
+function updateBottomDisplay(bottomTextToDisplay) {
     const displayDiv = document.getElementById('bottomText');
-    displayDiv.textContent = numberToDisplay;
+    displayDiv.textContent = bottomTextToDisplay;
 }
 
 function operatorIDToOperatorSign(buttonClicked) {
@@ -82,41 +83,46 @@ function clickAction(event){
     into correct sign and update display */
     operatorPressed = event.target.id
     operatorSign = operatorIDToOperatorSign(operatorPressed)
-    secondNumber = numberToDisplay
+    secondNumber = firstNumber;
     topTextToDisplay = `${secondNumber} ${operatorSign}`
     updateTopDisplay(topTextToDisplay)
     //User need to be able to input a new number
-    numberToDisplay = 0;    
+    firstNumber = 0;    
+}
+
+function clickNumberAction(event){
+    console.log(event.target.innerText)
+    numberClicked = event.target.innerText
+    if(firstNumber == 0) {
+        firstNumber = numberClicked;
+        updateBottomDisplay(numberClicked)
+    } else {
+        firstNumber = firstNumber+numberClicked;
+        updateBottomDisplay(firstNumber)
+    }
 }
 
 /* ALL BELOW SHOULD BE REWRITTEN AS SEVERAL FUNCTIONS
     THE CODE DOES WORK THOUGH */
 
 //Listens for button (number) click
-const buttons = document.querySelectorAll('.number');
+/* const buttons = document.querySelectorAll('.number');
     buttons.forEach((button) => {
     button.addEventListener('click', () => {
         buttonClicked = button.innerHTML;
             //Comment what below does
             if(numberToDisplay == 0) {
                 numberToDisplay = buttonClicked;
-                updateDisplay(numberToDisplay)
+                updateBottomDisplay(numberToDisplay)
             } else {
                     numberToDisplay = numberToDisplay+buttonClicked;
-                    updateDisplay(numberToDisplay)
+                    updateBottomDisplay(numberToDisplay)
                 }
                 console.log(numberToDisplay)
     });
-    });
-
-    function clickEqualAction(){
-        if (operatorPressed == "add") {
-            answer = add(secondNumber, numberToDisplay)
-            updateTopDisplay(`${secondNumber} ${operatorSign} ${numberToDisplay} =`)
-            updateDisplay(answer)
-        }
-    }
+    }); */
 
 
-    /* Måste byta namn på updateDisplay till bottomDisplay, 
-    måste byta namn på numberToDisplay och kanske number 2. Förtydliga det. */
+
+
+    /* måste byta namn på numberToDisplay och kanske number 2. Förtydliga det. */
