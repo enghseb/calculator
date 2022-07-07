@@ -50,16 +50,23 @@ function clickEqualAction(){
     } else {
 
     }
-    updateDisplayOnAnswer()
+    if (firstOperatorClick) {
+        updateDisplayOnAnswer()
+    } else {
+        console.log(answer)
+        firstNumber = 0;
+        secondNumber = answer;
+        operatorPressed = event.target.id
+        operatorSign = operatorIDToOperatorSign(operatorPressed)
+        updateTopDisplay(`${answer} ${operatorSign}`)
+        updateBottomDisplay(`${answer}`)
+    }
+    
 }
 
 function clickOperatorAgainAction(){
     answer = add(secondNumber, firstNumber)
-    console.log(answer)
-    updateTopDisplay(`${answer} ${operatorSign}`)
-    updateBottomDisplay(`${answer}`)
-    firstNumber = 0;
-    secondNumber = answer;
+
 }
     
 function add(num, num2) {
@@ -99,6 +106,7 @@ function operatorIDToOperatorSign(buttonClicked) {
     "÷": "divide", 
     "+": "add",
     "-": "subtract",
+    "": "equal",
     "clear": "clear",
 }
     //Finds key from conversion table by looking at button clicked
@@ -120,7 +128,8 @@ function clickOperatorAction(event){
         firstNumber = 0;
         firstOperatorClick = false;
     } else {
-        clickOperatorAgainAction()
+        clickEqualAction()
+        /* clickOperatorAgainAction() */
         /* firstNumber = 0;
         console.log(`First number is ${firstNumber} \n Second number is ${secondNumber} \n Operator is ${operatorPressed} \n answer is ${answer}`) */
         /* firstOperatorClick = true; */
