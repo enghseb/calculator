@@ -11,7 +11,6 @@ const subtractButton = document.getElementById('subtract')
 const clearButton = document.getElementById('clear')
 const equalButton = document.getElementById('equal')
 
-
 numberButtons.forEach((number) => {number.addEventListener('click', clickNumberAction)});
 /* numberButtons.addEventListener('click', clickNumberAction); */
 multiplyButton.addEventListener('click', clickOperatorAction);
@@ -26,6 +25,7 @@ function clickClearAction(){
     secondNumber = 0;
     operator = ""
     answer = 0
+    firstOperatorClick = true;
     updateTopDisplay(0)
     updateBottomDisplay(0)
 }
