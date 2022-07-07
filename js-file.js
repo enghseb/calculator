@@ -11,6 +11,11 @@ const divideButton = document.getElementById('divide')
 const subtractButton = document.getElementById('subtract')
 const clearButton = document.getElementById('clear')
 const equalButton = document.getElementById('equal')
+const backspaceButton = document.getElementById('backspace')
+
+/* Mainly wanted to practice an arrow function. */
+let clickBackspaceAction = backspace => updateBottomDisplay(firstNumber =
+    (firstNumber-(firstNumber%10))/10);
 
 numberButtons.forEach((number) => {number.addEventListener('click', clickNumberAction)});
 multiplyButton.addEventListener('click', clickOperatorAction);
@@ -19,13 +24,14 @@ divideButton.addEventListener('click', clickOperatorAction);
 subtractButton.addEventListener('click', clickOperatorAction);
 clearButton.addEventListener('click', clickClearAction);
 equalButton.addEventListener('click', clickEqualAction);
+backspaceButton.addEventListener('click', clickBackspaceAction);
 
 function clickClearAction(){
     /*Reset calculator state so user can start fresh */
     firstNumber = 0;
     secondNumber = 0;
     operator = ""
-    answer = 0
+    answer = ""
     firstOperatorClick = true;
     updateTopDisplay(0)
     updateBottomDisplay(0)
@@ -70,7 +76,7 @@ function clickEqualAction(){
                 updateTopDisplay(`${answer} ${operatorSign}`)
             }
         //New numbers can be typed, and saves the last answer to be used in next calculation
-        firstNumber = 0;
+        firstNumber = "";
         secondNumber = answer;
     }
     
