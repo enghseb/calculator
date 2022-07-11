@@ -191,7 +191,6 @@ function clickNumberAction(event){
 
 /* TODO 
 Button animation
-Better design
 Working . button (can only press once)
 Cut of decimals
 Text cut off if to long
