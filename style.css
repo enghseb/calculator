@@ -28,7 +28,11 @@ body {
 }
 
 .button:hover, .number:hover {
-    background-color: #3e8e41;
+    background-color: rgb(65, 65, 65);
+}
+
+.button:active, .number:active {
+    background-color: rgb(88, 88, 88);
 }
 
 .button, .number {
@@ -58,7 +62,7 @@ body {
     background-color: white;
     margin-bottom: 10px;
     margin-top: 10px;
-    text-overflow: clip;
+    overflow: hidden;
 }
 
 #topText {
@@ -88,6 +92,14 @@ body {
     background-color: rgb(255, 31, 31);
 }
 
+#clear:active {
+    background-color: rgb(248, 74, 74);
+}
+
 #backspace:hover {
     background-color: green;
+}
+
+#backspace:active {
+    background-color: #3e8e41;
 }

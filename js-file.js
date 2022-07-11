@@ -192,5 +192,4 @@ function clickNumberAction(event){
 /* TODO 
 Working . button (can only press once)
 Cut of decimals
-Text cut off if to long
 */
